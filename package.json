@@ -1,0 +1,14 @@
+{
+  "name": "opendata",
+  "version": "2.0.0",
+  "description": "OpenData",
+  "scripts": {
+    "clean": "gulp clean",
+    "dev": "gulp dev",
+    "serve": "gulp build && gulp serve",
+    "build": "gulp build"
+  },
+  "dependencies": {
+    "spig": "file:./spig"
+  }
+}
