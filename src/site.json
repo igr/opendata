@@ -1,0 +1,9 @@
+{
+  "name": "OpenData",
+  "baseURL": "https://opendata.rs",
+  "menu" : [
+    "/index.md",
+    "/inicijativa/index.md",
+    "/baza/index.md"
+  ]
+}

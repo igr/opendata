@@ -1,0 +1,9 @@
+<nav class="grid"><div class="wrapper">
+	<div class="flex">
+		<img src="/opendata.png" style="width: 72px;">
+    {% for m in site.menu %}
+      {% set p = site.pageOfSrc(m) %}
+      <div><a href="{{ p.url }}">{{ p.title }}</a></div>
+    {% endfor %}
+	</div>
+</div></nav>
