@@ -1,8 +1,8 @@
 @import "reset";
 @import "variables";
 
+@import url('https://fonts.googleapis.com/css?family=Heebo:400,700');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
-@import url('https://fonts.googleapis.com/css?family=Raleway');
 
 img {
 	width: auto;
@@ -12,7 +12,7 @@ h1,h2,h3 {
 }
 h1 {
 	font-size: 4em;
-	margin: 0 0 1em 0;
+	margin: 0 0 0.5em 0;
 	padding: 10px 0;
 	color: $color-red;
 	font-weight: bold;
@@ -23,11 +23,19 @@ h2 {
 	color: $color-red;
 	font-weight: bold;
 }
+h3 {
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+  color: $color-black;
+  font-weight: bold;
+}
+
 body {
   font-size: 16px;
   font-family: $font-main;
   color: $color-black;
   background-color: $color-white;
+  padding-top: 6em;
 }
 main {
 	margin: 2em 0 10em 0;
@@ -77,10 +85,6 @@ strong {
   color: $color-red;
 }
 
-header {
-	margin: 1em 0;
-}
-
 footer {
 	background-color: $color-black;
 	padding: 4em 0;
@@ -105,6 +109,10 @@ nav {
 	width: 100%;
 	background-color: $color-black;
 	padding: 0.5em 0;
+  position: fixed;
+  left: 0;
+  top:0;
+  z-index: 1000;
 	div.flex {
 		a {
 			padding: 1em;
@@ -119,6 +127,8 @@ nav {
 	}
 }
 
+@import "db";
+
 @media screen and (max-width: 600px) {
 	img {
 		width: 100%;
@@ -130,8 +140,11 @@ nav {
 		font-size: 2em;
 	}
 	h2 {
-		font-size: 1.3em;
+		font-size: 1.5em;
 	}
+  h3 {
+    font-size: 1.3em;
+  }
 	p, li {
 		font-size: 1em;
 	}

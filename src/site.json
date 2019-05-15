@@ -1,5 +1,6 @@
 {
   "name": "OpenData",
+  "title": "Open Data",
   "baseURL": "https://opendata.rs",
   "menu" : [
     "/index.md",

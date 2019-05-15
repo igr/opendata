@@ -1,8 +1,10 @@
+{% set menus = site.collections.menu %}
+
 <nav class="grid"><div class="wrapper">
 	<div class="flex">
 		<img src="/opendata.png" style="width: 72px;">
-    {% for m in site.menu %}
-      {% set p = site.pageOfSrc(m) %}
+    {% for m in menus | keys | sort %}
+      {% set p = menus[m][0] %}
       <div><a href="{{ p.url }}">{{ p.title }}</a></div>
     {% endfor %}
 	</div>

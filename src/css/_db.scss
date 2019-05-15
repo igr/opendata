@@ -1,0 +1,54 @@
+.row {
+  width: 50%;
+  float:left;
+}
+.fixed {
+  position: fixed;
+  max-width: 400px;
+}
+
+.resource {
+  margin-bottom: 40px;
+  .description {
+    font-size: 14px;
+  }
+  .link {
+    padding: 2px;
+    position: relative;
+    top: 2px;
+  }
+  .owner {
+    margin: 10px 0;
+    color: $color-gray;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+  }
+  .description {
+    margin: 10px 0 0 0;
+  }
+}
+
+.tags {
+  margin: 10px 0 20px 0;
+}
+.tag {
+  border: 1px solid $color-tag;
+  background-color: $color-tag;
+  color: $color-white;
+  text-transform: lowercase;
+  padding: 2px 6px;
+  font-size: 12px;
+
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -khtml-border-radius: 4px;
+}
+
+input {
+ width: 100%;
+}
+input[type=text] {
+  font-size: 2em;
+  padding: 2px;
+}

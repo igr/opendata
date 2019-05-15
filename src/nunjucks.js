@@ -2,6 +2,7 @@
 
 const datetimefmt = require('../spig/filters/datetimefmt');
 const pages = require('../spig/filters/pages');
+const collections = require('../spig/filters/collections');
 
 module.exports = nunjucksEnv => {
   nunjucksEnv
@@ -18,5 +19,7 @@ module.exports = nunjucksEnv => {
     .addFilter('groupByYear', pages.groupByDateYear)
     .addFilter('lastN', pages.lastN)
     .addFilter('firstN', pages.firstN)
+
+    .addFilter('keys', collections.keys)
   ;
 };
