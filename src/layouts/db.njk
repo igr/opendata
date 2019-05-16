@@ -1,6 +1,7 @@
 {% extends "base.njk" %}
 {% block main %}
 {% set od = site.data.opendata %}
+{% set ods = site.data.opendata_scores %}
   <div class="container">
     <div class="row">
       &nbsp;
@@ -33,6 +34,10 @@
             <span class="tag format">{{ res.format }}</span>
             <span class="tag gov">{{ od.owners[res.ownerId].org }}</span>
             <span class="tag src">{{ od.sources[res.sourceId].id }}</span>
+          </div>
+          <div class="tags">
+            <span class="tag health-{{ods[res.id].health}}">{{ ods[res.id].health }}</span>
+            <span class="tag online-{{ods[res.id].online}}">{{ "online" if ods[res.id].online else "offline" }}</span>
           </div>
           <div class="description">{{ res.description }}</div>
           <div class="description">
