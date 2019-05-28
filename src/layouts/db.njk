@@ -31,16 +31,34 @@
         <div class="resource">
           <h3>{{ res.title }} <a href="{{ res.url }}" target="_blank" class="link"><i class="fas fa-external-link-square-alt"></i></a></h3>
           <div class="tags">
-            <span class="tag license">{{ od.licenses[res.license].name }}</span>
-            <span class="tag format">{{ res.format }}</span>
-            <span class="tag gov">{{ od.owners[res.ownerId].org }}</span>
-            <span class="tag src">{{ od.sources[res.sourceId].id }}</span>
+            <span class="tag license">
+              {{ od.licenses[res.license].name }}
+            </span>
+            <span class="tag format">
+              {{ res.format }}
+            </span>
+            <span class="tag gov">
+              {{ od.owners[res.ownerId].org }}
+            </span>
+            <span class="tag src">
+              {{ od.sources[res.sourceId].id }}
+            </span>
           </div>
           <div class="scores">
-            <span class="tag health-{{score.health}}">{{ score.health }}</span>
-            <span class="tag health-{{score.scores['online']}}">{{ "online" if score.scores['online'] == 'HIGH' else "offline" }}</span>
-            <span class="tag health-{{score.scores['https']}}">{{ "https" if score.scores['https'] == 'HIGH' else "http" }}</span>
-            <span class="tag health-{{score.scores['license']}}">licenca</span>
+            <span class="tag health-{{score.health}}">
+              {{ score.health }}
+            </span>
+            <span class="tag health-{{score.scores['online']}}">
+              {{ "online" if score.scores['online'] == 'HIGH' else "offline" }}
+            </span>
+            <span class="tag health-{{score.scores['https']}}">
+              {{ "https" if score.scores['https'] == 'HIGH' else "http" }}
+            </span>
+            <span class="tag health-{{score.scores['license']}}">
+              {{ "rec" if score.scores['license'] == 'HIGH'}}
+              {{ "con" if score.scores['license'] == 'MEDIUM'}}
+              {{ "non" if score.scores['license'] == 'LOW'}}
+            </span>
           </div>
           <div class="description">{{ res.description }}</div>
           <div class="description">

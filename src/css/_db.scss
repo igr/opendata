@@ -46,15 +46,25 @@
   text-transform: lowercase;
   padding: 2px 6px;
   font-size: 12px;
+  margin-right: 2px;
 
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   -khtml-border-radius: 4px;
+
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 .tag.health-HIGH {
   background-color: $color-green;
+}
+.tag.health-MEDIUM {
+  background-color: $color-orange;
 }
 .tag.health-LOW {
   background-color: $color-red;
