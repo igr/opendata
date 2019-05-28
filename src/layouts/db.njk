@@ -52,7 +52,7 @@
               {{ "online" if score.scores['online'] == 'HIGH' else "offline" }}
             </span>
             <span class="tag health-{{score.scores['https']}}">
-              {{ "https" if score.scores['https'] == 'HIGH' else "http" }}
+              {{ "https" if score.scores['https'] == 'HIGH' else "insecure" }}
             </span>
             <span class="tag health-{{score.scores['license']}}">
               {{ "rec" if score.scores['license'] == 'HIGH'}}
