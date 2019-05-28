@@ -6,12 +6,17 @@
   position: fixed;
   max-width: 400px;
 }
+#count-matching {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#search {
+  margin-top: 10px;
+}
 
 .resource {
   margin-bottom: 40px;
-  .description {
-    font-size: 14px;
-  }
+
   .link {
     padding: 2px;
     position: relative;
@@ -24,12 +29,16 @@
     letter-spacing: -1px;
   }
   .description {
-    margin: 10px 0 0 0;
+    font-size: 14px;
+    margin: 20px 0 0 0;
   }
 }
 
 .tags {
-  margin: 10px 0 20px 0;
+  margin: 10px 0;
+}
+.scores {
+  margin: 10px 0;
 }
 .tag {
   background-color: $color-tag;
@@ -44,10 +53,10 @@
   -khtml-border-radius: 4px;
 }
 
-.tag.health-HIGH, .tag.online-true {
+.tag.health-HIGH {
   background-color: $color-green;
 }
-.tag.health-LOW, .tag.online-false {
+.tag.health-LOW {
   background-color: $color-red;
 }
 
@@ -57,4 +66,9 @@ input {
 input[type=text] {
   font-size: 2em;
   padding: 2px;
+}
+
+input[type=text]::placeholder {
+  color: #ddd;
+  opacity: 1;
 }
