@@ -16,13 +16,12 @@
           <input type="text" id="search-box" placeholder="Претрага ресурса..." spellcheck="false" autocorrect="off" autocomplete="false">
         </form>
 
-        <p>
+        <div style="margin-top: 20px;">
+          {% for srcId, src in od.sources %}
+            <label><input type="checkbox" name="{{ src.id }}" checked><span>{{ src.name }}</span></label><br>
+          {% endfor %}
+        </div>
 
-        </p>
-
-        <h2>Допуна скупа</h2>
-
-        <p>tba</p>
       </div>
     </div>
     <div class="row dataset">
@@ -55,9 +54,13 @@
               {{ "https" if score.scores['https'] == 'HIGH' else "insecure" }}
             </span>
             <span class="tag health-{{score.scores['license']}}">
-              {{ "rec" if score.scores['license'] == 'HIGH'}}
-              {{ "con" if score.scores['license'] == 'MEDIUM'}}
-              {{ "non" if score.scores['license'] == 'LOW'}}
+              {{ "R" if score.scores['license'] == 'HIGH'}}
+              {{ "C" if score.scores['license'] == 'MEDIUM'}}
+              {{ "N" if score.scores['license'] == 'LOW'}}
+            </span>
+            <span class="tag health-{{score.scores['mread']}}">
+              {{ "1" if score.scores['mread'] == 'HIGH'}}
+              {{ "0" if score.scores['mread'] == 'LOW'}}
             </span>
           </div>
           <div class="description">{{ res.description }}</div>
@@ -102,11 +105,18 @@ const $searchBox = $('#search-box');
 $searchBox.on('input', delay(function() {
   let searchText = $(this).val();
 
+  // prepare sources
+  const sources = {};
+  $(':checkbox').each((ndx, e) => {
+    const c = $(e);
+    sources[c.attr('name')] = c.is(':checked');
+  });
+
   // loop over each item and hide non-matching
 
   let countMatching = 0;
   $('.resource').each(function() {
-    if (isMatch($(this), searchText)) {
+    if (isMatch($(this), searchText, sources)) {
       countMatching++;
       $(this).show();
     } else {
@@ -141,10 +151,18 @@ function cyr2lat(string) {
   }).join('')
 }
 
-// Check matches
-let isMatch = ($resource, text) => {
-
+/**
+ * Check matches!
+ */
+let isMatch = ($resource, text, sources) => {
   text = text.toLowerCase();
+
+  // sources
+  const source = $resource.find('.tag.src').text().toLowerCase().trim();
+  if (!sources[source]) {
+    return false;
+  }
+
 
   // title
   const title = cyr2lat($resource.find("h3").text().toLowerCase().trim());
@@ -200,39 +218,7 @@ let isMatch = ($resource, text) => {
     }
   }
 
-  // // Short circuit for special case of query like tags:foo,bar
-  // const tagsRE = /tags:(.*)/.exec(text);
-  // if (tagsRE) {
-  //   const tags = tagsRE[1].split(',');
-  //   let hasMatch = false;
-  //   tags.forEach(function(tag) {
-  //     if (dataset.Tags.includes(tag.trim())) {
-  //       hasMatch = true;
-  //     }
-  //   });
-  //   if (hasMatch) { return true; }
-  // }
-
-  // // Short circuit for special case of query like managedBy:foo
-  // var managedByRE = /managedby:(.*)/.exec(text);
-  // if(managedByRE && dataset.ManagedBy) {
-  //   var managedBy = managedByRE[1];
-  //   return dataset.ManagedBy.toLowerCase().includes(managedBy.trim());
-  // }
-
-  // // Check resources Type
-  // var hasMatch = false;
-  // for (var i = 0; i < dataset.Resources.length; i++) {
-  //   if (!dataset.Resources[i].Type) { continue; }
-  //   if (dataset.Resources[i].Type.toLowerCase().indexOf(text) !== -1) {
-  //     hasMatch = true;
-  //     break;
-  //   }
-  // }
-  // if (hasMatch) { return true; }
-
-
-  // If we're here, no match
+  // no match
   return false;
 };
 
@@ -241,6 +227,10 @@ const triggerInput = text => {
   $searchBox.val(text);
   $searchBox.trigger('input');
 };
+
+$(':checkbox').change(() => {
+  $searchBox.trigger('input');
+});
 
 // Listen for clicks on the tags and go to appropriate page
 // $('.tag').click(function () {

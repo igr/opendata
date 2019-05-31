@@ -70,10 +70,8 @@
   background-color: $color-red;
 }
 
-input {
- width: 100%;
-}
 input[type=text] {
+  width: 100%;
   font-size: 2em;
   padding: 2px;
 }
@@ -81,4 +79,34 @@ input[type=text] {
 input[type=text]::placeholder {
   color: #ddd;
   opacity: 1;
+}
+
+input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+input[type="checkbox"] + span {
+  font: 16pt sans-serif;
+  color: #000;
+}
+input[type="checkbox"] + span:before {
+  font: 16pt "Font Awesome 5 Free";
+  content: '\00f0c8';
+  display: inline-block;
+  width: 16pt;
+  padding: 2px 0 0 3px;
+  margin-right: 0.3em;
+}
+input[type="checkbox"]:checked + span:before {
+  content: '\00f14a';
+}
+input[type="checkbox"]:focus + span:before {
+  outline: 1px dotted #aaa;
+}
+input[type="checkbox"]:disabled + span {
+  color: #999;
+}
+input[type="checkbox"]:not(:disabled) + span:hover:before {
+  text-shadow: 0 1px 2px #cccccc;
 }
