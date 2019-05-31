@@ -9,7 +9,7 @@
       {{ content | safe }}
 
         <p>Приказано: <span id="count-matching">{{od.resources | length }}</span> ресурса.<br>
-          Датум: {{ od.date }}
+          Датум: {{ od.date | rsDateLong }}
         </p>
 
         <form id="search">
