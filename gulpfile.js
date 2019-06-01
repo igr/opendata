@@ -11,8 +11,7 @@ Spig
   ._("PREPARE")
   .pageCommon()
   .collect('tags')
-  .collect('menu')
-  .readingTime()
+  .collectAttr('menu')
 
   ._("RENDER")
   .summary()
@@ -21,6 +20,27 @@ Spig
   .htmlMinify()
 ;
 
+// VIRTUAL PAGES
+
+Spig
+  .on()
+  .with((spig, site) => {
+    const scores = site.data.opendata_scores;
+    for (const id in scores) {
+      const fo = spig.addFile("/r/" + id, id);
+      fo.attr['title'] = 'Resurs';
+      fo.attr['layout'] = 'resource.njk';
+    }
+  })
+
+  ._("PREPARE")
+  .pageCommon()
+
+  ._("RENDER")
+  .render()
+  .applyTemplate()
+  .htmlMinify()
+;
 
 // IMAGES
 
