@@ -137,3 +137,23 @@ dd {
   width: 256px;
   margin: 20px auto;
 }
+
+
+@media screen and (max-width: 600px) {
+  .row {
+    width: 100%;
+  }
+  .fixed {
+    position: relative;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px dotted #333;
+  }
+  dl {
+    display: table;
+    border: none;
+  }
+  dt {
+    text-align: left;
+  }
+}
