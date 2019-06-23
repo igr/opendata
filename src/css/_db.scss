@@ -17,6 +17,14 @@
 .resource {
   margin-bottom: 40px;
 
+  .title {
+    font-family: $font-title;
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+    color: $color-black;
+    font-weight: bold;
+  }
+
   .link {
     padding: 2px;
     position: relative;
@@ -155,5 +163,11 @@ dd {
   }
   dt {
     text-align: left;
+  }
+  input[type="checkbox"] + span {
+    font: 12pt sans-serif;
+  }
+  input[type="checkbox"] + span:before {
+    font: 12pt "Font Awesome 5 Free";
   }
 }

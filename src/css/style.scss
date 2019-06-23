@@ -23,9 +23,8 @@ h2 {
 	font-weight: bold;
 }
 h3 {
-  font-size: 1.3em;
-  margin-bottom: 0.5em;
-  color: $color-black;
+  font-size: 2em;
+  color: $color-red;
   font-weight: bold;
 }
 
@@ -43,6 +42,12 @@ main {
   display: grid;
   grid-template-columns: 1fr minmax(auto, 1000px) 1fr;
   grid-gap: 1em;
+}
+
+code {
+  font-family: monospace;
+  background-color: #eee;
+  padding: 0 2px;
 }
 
 .wrapper {
@@ -148,8 +153,7 @@ nav {
 		font-size: 1em;
 	}
 	.grid {
-		grid-template-columns: 1fr;
-		grid-gap: 0;
+    display: inline;
 	}
   nav {
     font-size: 0.7em;
@@ -159,9 +163,11 @@ nav {
     }
   }
 	.wrapper {
-	  grid-column: 1;
 	  line-height: 1;
 	  font-size: 1em;
-	  padding: 0 1em;
+	  margin: 0 1em;
 	}
+  .row {
+    width: 90%;
+  }
 }
