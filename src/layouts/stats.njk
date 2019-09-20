@@ -1,0 +1,65 @@
+{% extends "base.njk" %}
+
+{% block head %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css' type='text/css' media='all'/>
+{% endblock %}
+
+{% block main %}
+{% set stats = site.data.opendata_stats %}
+
+  <div class="container">
+      {{ content | safe }}
+
+      const data_size = [];
+
+      <h3>{{ size }}</h3>
+      <ul>
+         <li>{{ stats.size }}</li>
+      </ul>
+
+      <h3>{{ "health" }}</h3>
+      <ul>
+
+      const data_health = [
+        {% for healthPropGradeId, healthPropGrade in stats.health %}
+         {{ healthPropGrade }},
+        {% endfor %}
+      ];
+        {% for healthPropGradeId, healthPropGrade in stats.health %}
+         <li>{{ healthPropGradeId }}: {{ healthPropGrade }}</li>
+        {% endfor %}
+      </ul>
+
+      {% for scorePropId, scoreProp in stats.score %}
+        <h3>{{ scorePropId }}</h3>
+        <ul>
+          {% for scorePropGradeId, scorePropGrade in scoreProp %}
+            <li>{{ scorePropGradeId }}: {{ scorePropGrade }}</li>
+          {% endfor %}
+        </ul>
+      {% endfor %}
+
+  </div>
+
+<canvas id="myChart" width="400" height="400"></canvas>
+<script type="application/javascript">
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: [{% for healthPropGradeId, healthPropGrade in stats.health %}'{{ healthPropGradeId }}',{% endfor %}],
+    datasets: [{
+      data: [{% for healthPropGradeId, healthPropGrade in stats.health %}{{ healthPropGrade }},{% endfor %}],
+      backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)'
+      ]
+    }]
+  }
+});
+
+</script>
+{% endblock %}
