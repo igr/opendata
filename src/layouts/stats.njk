@@ -7,56 +7,88 @@
 
 {% block main %}
 {% set stats = site.data.opendata_stats %}
-
   <div class="container">
-      {{ content | safe }}
 
-      const data_size = [];
+    {{ content | safe }}
+    <div class="row">
+      <h3>Ukupna ocena</h3>
+      <canvas id="chart-health"></canvas>
+      Broj setova: {{ stats.size }}
+    </div>
+    <div class="row">
+      <h4>Licence</h4>
+      <div style="width: 300px"><canvas id="chart-license"></canvas></div>
 
-      <h3>{{ size }}</h3>
-      <ul>
-         <li>{{ stats.size }}</li>
-      </ul>
+      <h4>Online</h4>
+      <div style="width: 300px"><canvas id="chart-online"></canvas></div>
 
-      <h3>{{ "health" }}</h3>
-      <ul>
+      <h4>Https</h4>
+      <div style="width: 300px"><canvas id="chart-https"></canvas></div>
 
-      const data_health = [
-        {% for healthPropGradeId, healthPropGrade in stats.health %}
-         {{ healthPropGrade }},
-        {% endfor %}
-      ];
-        {% for healthPropGradeId, healthPropGrade in stats.health %}
-         <li>{{ healthPropGradeId }}: {{ healthPropGrade }}</li>
-        {% endfor %}
-      </ul>
-
-      {% for scorePropId, scoreProp in stats.score %}
-        <h3>{{ scorePropId }}</h3>
-        <ul>
-          {% for scorePropGradeId, scorePropGrade in scoreProp %}
-            <li>{{ scorePropGradeId }}: {{ scorePropGrade }}</li>
-          {% endfor %}
-        </ul>
-      {% endfor %}
-
+      <h4>Mašinska čitljivost</h4>
+      <div style="width: 300px"><canvas id="chart-mread"></canvas></div>
+    </div>
   </div>
 
-<canvas id="myChart" width="400" height="400"></canvas>
-<script type="application/javascript">
 
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
+<script type="application/javascript">
+const backgroundColor = [
+  'rgba(255, 99, 132, 0.5)',
+  'rgba(54, 162, 235, 0.5)',
+  'rgba(20, 230, 00, 0.5)'
+];
+let ctx = document.getElementById('chart-health').getContext('2d');
+const myChartHealth = new Chart(ctx, {
   type: 'pie',
   data: {
-    labels: [{% for healthPropGradeId, healthPropGrade in stats.health %}'{{ healthPropGradeId }}',{% endfor %}],
+    labels: [{% for id, grade in stats.health %}'{{ id }}',{% endfor %}],
     datasets: [{
-      data: [{% for healthPropGradeId, healthPropGrade in stats.health %}{{ healthPropGrade }},{% endfor %}],
-      backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)'
-      ]
+      data: [{% for id, grade in stats.health %}{{ grade }},{% endfor %}],
+      backgroundColor
+    }]
+  }
+});
+ctx = document.getElementById('chart-license').getContext('2d');
+const myChartLicense = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: [{% for id, grade in stats.score.license %}'{{ id }}',{% endfor %}],
+    datasets: [{
+      data: [{% for id, grade in stats.score.license %}{{ grade }},{% endfor %}],
+      backgroundColor
+    }]
+  }
+});
+ctx = document.getElementById('chart-online').getContext('2d');
+const myChartOnline = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: [{% for id, grade in stats.score.online %}'{{ id }}',{% endfor %}],
+    datasets: [{
+      data: [{% for id, grade in stats.score.online %}{{ grade }},{% endfor %}],
+      backgroundColor
+    }]
+  }
+});
+ctx = document.getElementById('chart-https').getContext('2d');
+const myChartHttps = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: [{% for id, grade in stats.score.https %}'{{ id }}',{% endfor %}],
+    datasets: [{
+      data: [{% for id, grade in stats.score.https %}{{ grade }},{% endfor %}],
+      backgroundColor
+    }]
+  }
+});
+ctx = document.getElementById('chart-mread').getContext('2d');
+const myChartMread = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: [{% for id, grade in stats.score.mread %}'{{ id }}',{% endfor %}],
+    datasets: [{
+      data: [{% for id, grade in stats.score.mread %}{{ grade }},{% endfor %}],
+      backgroundColor
     }]
   }
 });
