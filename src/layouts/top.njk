@@ -3,8 +3,8 @@
 <nav class="grid"><div class="wrapper">
 	<div class="flex">
 		<img src="/opendata.png" style="width: 72px;">
-    {% for m in menus | keys | sort %}
-      {% set p = menus[m][0] %}
+    {% for m in site.menus() | sort %}
+      {% set p = m.group[0] %}
       <div><a href="{{ p.url }}">{{ p.title }}</a></div>
     {% endfor %}
 	</div>

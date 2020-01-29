@@ -1,0 +1,97 @@
+{% extends "base.njk" %}
+
+{% block head %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css' type='text/css' media='all'/>
+{% endblock %}
+
+{% block main %}
+{% set stats = site.data.opendata_stats %}
+  <div class="container">
+
+    {{ content | safe }}
+    <div class="row">
+      <h3>Ukupna ocena</h3>
+      <canvas id="chart-health"></canvas>
+      Broj setova: {{ stats.size }}
+    </div>
+    <div class="row">
+      <h4>Licence</h4>
+      <div style="width: 300px"><canvas id="chart-license"></canvas></div>
+
+      <h4>Online</h4>
+      <div style="width: 300px"><canvas id="chart-online"></canvas></div>
+
+      <h4>Https</h4>
+      <div style="width: 300px"><canvas id="chart-https"></canvas></div>
+
+      <h4>Mašinska čitljivost</h4>
+      <div style="width: 300px"><canvas id="chart-mread"></canvas></div>
+    </div>
+  </div>
+
+
+<script type="application/javascript">
+const backgroundColor = [
+  'rgba(255, 99, 132, 0.5)',
+  'rgba(54, 162, 235, 0.5)',
+  'rgba(20, 230, 00, 0.5)'
+];
+let ctx = document.getElementById('chart-health').getContext('2d');
+const myChartHealth = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: [{% for id, grade in stats.health %}'{{ id }}',{% endfor %}],
+    datasets: [{
+      data: [{% for id, grade in stats.health %}{{ grade }},{% endfor %}],
+      backgroundColor
+    }]
+  }
+});
+ctx = document.getElementById('chart-license').getContext('2d');
+const myChartLicense = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: [{% for id, grade in stats.score.license %}'{{ id }}',{% endfor %}],
+    datasets: [{
+      data: [{% for id, grade in stats.score.license %}{{ grade }},{% endfor %}],
+      backgroundColor
+    }]
+  }
+});
+ctx = document.getElementById('chart-online').getContext('2d');
+const myChartOnline = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: [{% for id, grade in stats.score.online %}'{{ id }}',{% endfor %}],
+    datasets: [{
+      data: [{% for id, grade in stats.score.online %}{{ grade }},{% endfor %}],
+      backgroundColor
+    }]
+  }
+});
+ctx = document.getElementById('chart-https').getContext('2d');
+const myChartHttps = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: [{% for id, grade in stats.score.https %}'{{ id }}',{% endfor %}],
+    datasets: [{
+      data: [{% for id, grade in stats.score.https %}{{ grade }},{% endfor %}],
+      backgroundColor
+    }]
+  }
+});
+ctx = document.getElementById('chart-mread').getContext('2d');
+const myChartMread = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: [{% for id, grade in stats.score.mread %}'{{ id }}',{% endfor %}],
+    datasets: [{
+      data: [{% for id, grade in stats.score.mread %}{{ grade }},{% endfor %}],
+      backgroundColor
+    }]
+  }
+});
+
+</script>
+{% endblock %}

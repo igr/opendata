@@ -1,19 +1,21 @@
-"use strict";
+const { Spig } = require('spignite');
+const SpigConfig  = require('spignite/lib/spig-config');
 
-const Spig = require('./spig/spig');
-require('require-dir')('./spig/tasks');
+Spig.hello();
 
 // PAGES
 
 Spig
   .on('/**/*.{md,njk}')
+  .watchSite()
 
-  ._("PREPARE")
-  .pageCommon()
-  .collect('tags')
-  .collectAttr('menu')
+  ._('PREPARE')
+  .pageMeta()
+  .tags()
+  .group('menu')
+  .pageLinks()
 
-  ._("RENDER")
+  ._('RENDER')
   .summary()
   .render()
   .applyTemplate()
@@ -24,8 +26,8 @@ Spig
 
 Spig
   .on()
-  .with((spig, site) => {
-    const scores = site.data.opendata_scores;
+  .with((spig) => {
+    const scores = SpigConfig.site.data.opendata_scores;
     for (const id in scores) {
       const fo = spig.addFile("/r/" + id, id);
       fo.attr['title'] = 'Resurs';
@@ -34,7 +36,8 @@ Spig
   })
 
   ._("PREPARE")
-  .pageCommon()
+  .pageMeta()
+  .pageLinks()
 
   ._("RENDER")
   .render()
@@ -47,9 +50,8 @@ Spig
 Spig
   .on('/**/*.{png,jpg,gif}')
 
-  ._("PREPARE")
-  .assetCommon()
-
-  ._("ASSETS")
-  .imageMinify()
+  ._('PREPARE')
+  .assetLinks()
 ;
+
+Spig.run();
