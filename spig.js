@@ -26,12 +26,13 @@ Spig
 
 Spig
   .on()
+  .watchSite()
   .with((spig) => {
     const scores = SpigConfig.site.data.opendata_scores;
     for (const id in scores) {
       const fo = spig.addFile("/r/" + id, id);
-      fo.attr['title'] = 'Resurs';
-      fo.attr['layout'] = 'resource.njk';
+      fo.setAttr('title', 'Resurs');
+      fo.setAttr('layout', 'resource');
     }
   })
 
