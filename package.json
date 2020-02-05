@@ -1,6 +1,6 @@
 {
   "name": "opendata",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "OpenData",
   "scripts": {
     "clean": "rm -rf out",
@@ -9,6 +9,6 @@
     "build:lambda": "cd netlify && build.sh"
   },
   "dependencies": {
-    "spignite": "^2.0.7"
+    "spignite": "^2.0.8"
   }
 }
