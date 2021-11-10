@@ -5,9 +5,9 @@ menu: 99
 
 # Контакт
 
-[info@heapspace.rs](mailto:info@heapspace.rs?subject=OpenData)
+[opendata@igo.rs](mailto:opendata@igo.rs?subject=OpenData)
 
-## Пројекти
+## Сродни Пројекти
 
 + [OpenData baza](https://github.com/HeapSpace/opendata-database)
 + [OpenData validator](https://github.com/HeapSpace/opendata-validator)
